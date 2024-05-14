@@ -1,6 +1,6 @@
 # node-xvfb-ts
 
-Easily start and stop an X Virtual Frame Buffer from your node apps and typescript.
+Easily start and stop an X Virtual Frame Buffer from your node apps.
 
 -----
 

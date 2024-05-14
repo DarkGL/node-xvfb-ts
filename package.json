@@ -1,0 +1,56 @@
+{
+  "author": "Rafał Więcek <contact@darkgl.pl> (https://darkgl.pl/)",
+  "contributors": [
+    "ProxV, Inc. <support@proxv.com> (http://proxv.com)",
+    "Rob Wu <rob@robwu.nl> (https://robwu.nl)"
+  ],
+  "scripts": {
+    "lint": "npx @biomejs/biome lint --apply ./src ./test",
+    "format": "npx @biomejs/biome format --write ./src ./test",
+    "check": "npx @biomejs/biome check --apply ./src ./test",
+    "build": "tsc --build",
+    "prepare": "husky",
+    "test": "npm run build && node --loader ts-node/esm ./test/test.ts"
+  },
+  "type": "module",
+  "name": "xvfb-",
+  "description": "Easily start and stop an X Virtual Frame Buffer from your node apps.",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DarkGL/node-xvfb-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DarkGL/node-xvfb-ts/issues"
+  },
+  "homepage": "https://github.com/DarkGL/node-xvfb-ts#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@types/node": "^20.12.12",
+    "husky": "^9.0.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "keywords": [
+    "xvfb",
+    "headless",
+    "virtual",
+    "frame",
+    "buffer",
+    "browser",
+    "chrome",
+    "firefox",
+    "safari",
+    "edge",
+    "electron",
+    "puppeteer",
+    "playwright",
+    "testing",
+    "test",
+    "tests",
+    "automation",
+    "selenium",
+    "webdriver"
+  ]
+}

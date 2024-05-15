@@ -81,17 +81,19 @@ class Xvfb {
     }
 
     public display() {
-        if (!this._display) {
-            let displayNum = 98;
-            let lockFile: string | undefined;
-
-            do {
-                displayNum++;
-                lockFile = this._lockFile(displayNum);
-            } while (!this._reuse && fs.existsSync(lockFile));
-
-            this._display = `:${displayNum}`;
+        if (this._display) {
+            return this._display;
         }
+
+        let displayNum = 98;
+        let lockFile: string | undefined;
+
+        do {
+            displayNum++;
+            lockFile = this._lockFile(displayNum);
+        } while (!this._reuse && fs.existsSync(lockFile));
+
+        this._display = `:${displayNum}`;
 
         return this._display;
     }

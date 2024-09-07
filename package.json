@@ -5,19 +5,23 @@
     "Rob Wu <rob@robwu.nl> (https://robwu.nl)"
   ],
   "scripts": {
-    "lint": "npx @biomejs/biome lint --apply ./src ./test",
+    "ci": "npm run build && npm run check && npm run check-exports",
+    "lint": "npx @biomejs/biome lint --write ./src ./test",
     "format": "npx @biomejs/biome format --write ./src ./test",
-    "check": "npx @biomejs/biome check --apply ./src ./test",
+    "check": "npx @biomejs/biome check --write ./src ./test",
     "build": "tsc --build",
     "prepare": "husky",
-    "test": "npm run build && node --loader ts-node/esm ./test/test.ts"
+    "test": "npm run build && node --loader ts-node/esm ./test/test.ts",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "local-release": "changeset version && changeset publish",
+    "prepublishOnly": "npm run ci"
   },
   "type": "module",
   "name": "xvfb-ts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "description": "Easily start and stop an X Virtual Frame Buffer from your node apps.",
-  "version": "1.0.1",
+  "description": "Easily start and stop an X Virtual Frame Buffer from your node app",
+  "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/DarkGL/node-xvfb-ts.git"
@@ -28,11 +32,13 @@
   "homepage": "https://github.com/DarkGL/node-xvfb-ts#readme",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "1.7.3",
-    "@types/node": "^20.12.12",
-    "husky": "^9.0.11",
+    "@arethetypeswrong/cli": "^0.16.1",
+    "@biomejs/biome": "1.8.3",
+    "@changesets/cli": "^2.27.8",
+    "@types/node": "^22.5.4",
+    "husky": "^9.1.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.4"
   },
   "keywords": [
     "xvfb",
@@ -57,12 +63,14 @@
     "automation",
     "selenium",
     "webdriver",
-    "typescript"
+    "typescript",
+    "node-xvfb",
+    "frame buffer"
   ],
   "files": [
-    "/dist"
+    "dist"
   ],
   "engines": {
-    "node": ">=20.13.1"
+    "node": ">=20.17.0"
   }
 }

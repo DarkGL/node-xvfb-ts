@@ -32,11 +32,11 @@
   "homepage": "https://github.com/DarkGL/node-xvfb-ts#readme",
   "license": "MIT",
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.16.4",
+    "@arethetypeswrong/cli": "^0.17.0",
     "@biomejs/biome": "1.9.4",
-    "@changesets/cli": "^2.27.9",
-    "@types/node": "^22.8.5",
-    "husky": "^9.1.6",
+    "@changesets/cli": "^2.27.10",
+    "@types/node": "^22.9.1",
+    "husky": "^9.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },

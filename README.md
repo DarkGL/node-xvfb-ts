@@ -58,8 +58,11 @@ interface XvfbOptions {
 import { Xvfb } from 'xvfb-ts';
 
 const xvfb = new Xvfb({ displayNum: 88 });
+
 await xvfb.start();
+
 console.log(`Display: ${xvfb.display()}`); // :88
+
 await xvfb.stop();
 ```
 
@@ -70,6 +73,7 @@ const xvfb = new Xvfb({
     displayNum: 99, 
     reuse: true 
 });
+
 await xvfb.start(); // Won't fail if :99 already exists
 ```
 
@@ -79,6 +83,7 @@ await xvfb.start(); // Won't fail if :99 already exists
 const xvfb = new Xvfb({
     xvfb_args: ['-screen', '0', '1024x768x24']
 });
+
 await xvfb.start();
 ```
 

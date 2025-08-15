@@ -1,31 +1,100 @@
 # node-xvfb-ts
 
-Easily start and stop an X Virtual Frame Buffer from your node apps.
+A TypeScript library for easily managing X Virtual Frame Buffer (Xvfb) processes in Node.js applications. Perfect for headless GUI testing with tools like Puppeteer, Playwright, or Selenium.
 
------
+## Installation
 
-## Usage
+```bash
+npm install xvfb-ts
+```
+
+## Prerequisites
+
+- Linux/Unix system with Xvfb installed
+- Node.js >= 20.17.0
+
+## Quick Start
 
 ```typescript
 import { Xvfb } from 'xvfb-ts';
+
 const xvfb = new Xvfb();
 
+// Start the virtual display
 await xvfb.start();
 
-// code that uses the virtual frame buffer here
+// Run your headless GUI tests here
+// e.g., launch a browser, run Electron app, etc.
 
+// Clean up when done
 await xvfb.stop();
-// the Xvfb is stopped
 ```
 
-The Xvfb constructor takes four options:
+## API Reference
 
-* `displayNum` - the X display to use, defaults to the lowest unused display number >= 99 if `reuse` is false or 99 if `reuse` is true.
-* `reuse` - whether to reuse an existing Xvfb instance if it already exists on the X display referenced by displayNum.
-* `timeout` - number of milliseconds to wait when starting Xvfb before assuming it failed to start, defaults to 500.
-* `silent` - don't pipe Xvfb stderr to the process's stderr.
-* `xvfb_args` - Extra arguments to pass to `Xvfb`.
+### Constructor Options
 
-### Thanks to
+```typescript
+interface XvfbOptions {
+    displayNum?: number;     // X display number (default: auto-assigned >= 99)
+    reuse?: boolean;         // Reuse existing display (default: false)
+    timeout?: number;        // Startup timeout in ms (default: 500)
+    silent?: boolean;        // Suppress stderr output (default: false)
+    xvfb_args?: string[];    // Additional Xvfb arguments (default: [])
+}
+```
 
-* [Rob--W](https://github.com/Rob--W) for [xvfb](https://github.com/Rob--W/node-xvfb)
+### Methods
+
+- `start()` - Start the Xvfb process (returns Promise<ChildProcess>)
+- `stop()` - Stop the Xvfb process (returns Promise<void>)
+- `display()` - Get the display string (e.g., ":99")
+
+## Examples
+
+### Basic Usage with Custom Display
+
+```typescript
+import { Xvfb } from 'xvfb-ts';
+
+const xvfb = new Xvfb({ displayNum: 88 });
+await xvfb.start();
+console.log(`Display: ${xvfb.display()}`); // :88
+await xvfb.stop();
+```
+
+### Reusing Existing Display
+
+```typescript
+const xvfb = new Xvfb({ 
+    displayNum: 99, 
+    reuse: true 
+});
+await xvfb.start(); // Won't fail if :99 already exists
+```
+
+### Custom Xvfb Arguments
+
+```typescript
+const xvfb = new Xvfb({
+    xvfb_args: ['-screen', '0', '1024x768x24']
+});
+await xvfb.start();
+```
+
+### Error Handling
+
+```typescript
+try {
+    await xvfb.start();
+    // Your code here
+} catch (error) {
+    console.error('Failed to start Xvfb:', error.message);
+} finally {
+    await xvfb.stop();
+}
+```
+
+## Credits
+
+* [Rob--W](https://github.com/Rob--W) for the original [node-xvfb](https://github.com/Rob--W/node-xvfb)
